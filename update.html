@@ -39,9 +39,9 @@
                 e.preventDefault()
                 const params={
                 bno: bno,
-                $title:$('#title').val(),
-                $content:$('#content').val(),
-                $password:$('#password').val()
+                title:$('#title').val(),
+                content:$('#content').val(),
+                password:$('#password').val()
             }
             $.ajax({
                 url:'http://192.168.0.177:8081/board/update',
@@ -49,14 +49,17 @@
                 data: params,
                 success:function(){
                     location.href="list.html"
-                    }
+                    },
+                error:function(xx){
+                    alert(xx.responseText)
+                }
                 })
             })
             $('#delete').on('click',function(e){
                 e.preventDefault()
                 const params={
                     bno: bno,
-                    $password:$('#password').val()
+                    password:$('#password').val()
                 }
                 $.ajax({
                     url:'http://192.168.0.177:8081/board/delete',
@@ -66,7 +69,7 @@
                         location.href="list.html"
                     },
                     error:function(xxx){
-                        alert()
+                        alert(xxx.responseText)
                     }
                 })
             })
