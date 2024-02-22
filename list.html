@@ -11,7 +11,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         const url = "http://192.168.0.177:8081/board/list"
-         $(document).ready(function(e){
+         $(document ).ready(function(e){
             const $tbody = $('#tbody');
 
             $.ajax({
@@ -23,7 +23,7 @@
                         let html = `
                     <tr>
                         <td>${c.bno}</td>
-                        <td><a href="read.html?cno=${c.bno}">${c.title}</a></td>
+                        <td><a href="read.html?bno=${c.bno}">${c.title}</a></td>
                         <td>${c.nickname}</td>
                         <td>${c.writeday}</td>
                         <td>${c.readcnt}</td>
