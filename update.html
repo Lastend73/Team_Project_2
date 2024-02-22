@@ -3,9 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>update</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <title>Document</title>
+    <script>
+        $(document).ready(function(){
+            const searchParams = new URLSearchParams(location.search)
+            const bno = searchParams.get('bno')
+            if (bno==null){
+                location.href="list.html"
+            }
+            $.ajax({
+                url:"http://192.168.0.177:8081/board/read?bno="+ bno,
+                success:function(result){
+                    $('#title').val(result.title)
+                    $('#content').val(result.title)
+                    $('#password').val(result.title)
+                },
+                error:function(x){
+                    alert(x.responseText)
+                    location.href="list.html"
+                }
+                
+            })
+            $('#update').on('click',function(e){
+                e.preventDefault()
+                const params={
+                bno: bno,
+                $title:$('#title').val(),
+                $content:$('#content').val(),
+                $password:$('#password').val()
+            }
+            $.ajax({
+                url:'http://192.168.0.177:8081/board/update',
+                method:'post',
+                data: params,
+                success:function(){
+                    location.href="list.html"
+                    }
+                })
+            })
+            $('#delete').on('click',function(e){
+                e.preventDefault()
+                const params={
+                    bno: bno,
+                    $password:$('#password').val()
+                }
+                $.ajax({
+                    url:'http://192.168.0.177:8081/board/delete',
+                    method:'post',
+                    data: params,
+                    success:function(){
+                        location.href="list.html"
+                    },
+                    error:function(xxx){
+                        alert()
+                    }
+                })
+            })
+        })
+    </script>
 </head>
 <body>
-    
+    <input type="text" name="title" id="title"><br>
+    <input type="text" name="content" id="content"><br>
+    <input type="password" name="password" id="password"><br>
+    <button id="update">변경</button>
+    <button id="delete">삭제</button>
 </body>
 </html>
